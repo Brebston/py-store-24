@@ -1,53 +1,47 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Create Account | thc-24</title>
-  <meta name="description" content="Create your account to track orders, manage delivery addresses and access secure checkout." />
-  <link rel="stylesheet" href="styles/main.css" />
-</head>
-<body>
-
-<div class="topbar">
-  <div class="container">
-    <div class="nav">
-      <a class="brand" href="index.html">
-        <span class="brand-badge"></span>
-        <span>thc-24</span>
-      </a>
-    </div>
-  </div>
-</div>
+{% extends "base.html" %}
+{% block content %}
 
 <main class="container" style="max-width:600px;margin:60px auto">
   <div class="card pad">
     <h1>Create Account</h1>
     <p class="muted">Register to manage orders and delivery details.</p>
 
-    <form class="form" style="margin-top:20px">
-      <div class="field">
-        <label>Full Name</label>
-        <input class="input" placeholder="John Smith" />
-      </div>
+    <form method="post" class="form" style="margin-top:20px">
+      {% csrf_token %}
 
-      <div class="field">
-        <label>Email</label>
-        <input class="input" type="email" placeholder="you@email.com" />
-      </div>
+      {% include "components/form_field.html" with field=form.first_name %}
+      {% include "components/form_field.html" with field=form.last_name %}
+      {% include "components/form_field.html" with field=form.email %}
+      {% include "components/form_field.html" with field=form.password1 %}
+      {% include "components/form_field.html" with field=form.password2 %}
 
-      <div class="field">
-        <label>Password</label>
-        <input class="input" type="password" placeholder="Minimum 8 characters" />
-      </div>
-
-      <div class="field">
-        <label>Confirm Password</label>
-        <input class="input" type="password" placeholder="Repeat password" />
-      </div>
-
+{#      <div class="field">#}
+{#        <label>First Name</label>#}
+{#        {{ form.first_name }}#}
+{#      </div>#}
+{##}
+{#      <div class="field">#}
+{#        <label>Last Name</label>#}
+{#        {{ form.last_name }}#}
+{#      </div>#}
+{##}
+{#      <div class="field">#}
+{#        <label>Email</label>#}
+{#        {{ form.email }}#}
+{#      </div>#}
+{##}
+{#      <div class="field">#}
+{#        <label>Password</label>#}
+{#        {{ form.password1 }}#}
+{#      </div>#}
+{##}
+{#      <div class="field">#}
+{#        <label>Confirm Password</label>#}
+{#        {{ form.password2 }}#}
+{#      </div>#}
+{##}
       <div style="margin-top:20px">
-        <button class="btn primary" type="button" style="width:100%">Create Account</button>
+        <button class="btn primary" type="submit" style="width:100%">Create Account</button>
       </div>
 
       <div style="margin-top:15px;text-align:center">
@@ -57,6 +51,4 @@
     </form>
   </div>
 </main>
-
-</body>
-</html>
+{% endblock %}

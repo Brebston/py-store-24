@@ -30,7 +30,7 @@ class RegisterForm(UserCreationForm):
         required=True,
         widget=forms.EmailInput(attrs={
         "class": "input",
-        "placeholder": "alex@email.com"
+        "placeholder": "user@email.com"
         })
     )
 
@@ -47,5 +47,24 @@ class RegisterForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={
             "class": "input",
             "placeholder": "Repeat password"
+        })
+    )
+
+
+class LoginForm(AuthenticationForm):
+
+    username = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={
+            "class": "input",
+            "placeholder": "user@email.com"
+        })
+    )
+
+    password = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput(attrs={
+            "class": "input",
+            "placeholder": "••••••••"
         })
     )

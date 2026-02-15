@@ -8,21 +8,22 @@
       <p class="muted">Authentication UI (static). Connect to your auth system.</p>
       <div class="hr"></div>
 
-      <form class="form" action="#" method="post">
-        <div class="field">
-          <label for="email">Email</label>
-          <input class="input" id="email" placeholder="you@email.com" />
-        </div>
-        <div class="field">
-          <label for="pass">Password</label>
-          <input class="input" id="pass" type="password" placeholder="••••••••" />
-        </div>
+      <form class="form" method="post">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="form-errors">
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+
+        {% include "components/form_field.html" with field=form.username %}
+        {% include "components/form_field.html" with field=form.password %}
+
         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
-          <a class="btn primary" href="account.html">Sign in</a>
+          <button class="btn primary" type="submit">Sign in</button>
           <a class="btn" href="#">Forgot password</a>
           <span class="muted" style="font-size:13px">No account? <a href="register.html" style="text-decoration:underline">Create one</a></span>
         </div>
-        <div class="help">Tip: Add reCAPTCHA + rate limiting in real production.</div>
       </form>
     </div>
   </section>

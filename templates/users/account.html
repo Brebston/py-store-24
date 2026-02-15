@@ -8,7 +8,10 @@
         <h1 class="h1">Account</h1>
         <div class="muted">Profile UI: delivery address, personal details, password change.</div>
       </div>
-      <a class="btn" href="login.html">Log out</a>
+      <form action="{% url 'users:logout' %}" method="post">
+        {% csrf_token %}
+        <button class="btn" type="submit">Logout</button>
+      </form>
     </div>
 
     <div class="grid cols-2">
@@ -31,7 +34,7 @@
           <div class="two">
             <div class="field">
               <label for="email">Email</label>
-              <input class="input" id="email" placeholder="alex@email.com" />
+              <input class="input" id="email" placeholder="user@email.com" />
             </div>
             <div class="field">
               <label for="phone">Phone</label>

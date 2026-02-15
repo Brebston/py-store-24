@@ -66,6 +66,9 @@ ROOT_URLCONF = "shop_service.urls"
 
 AUTH_USER_MODEL = "users.User"
 
+LOGIN_URL = "users:login"
+LOGIN_REDIRECT_URL = "users:profile"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

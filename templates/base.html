@@ -1,0 +1,96 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>thc-24 | Modern Online Store UI</title>
+  <meta name="description" content="Modern, responsive e-commerce frontend UI template with banners, categories, product pages, cart, and account dashboard." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="thc-24 | Modern Online Store UI" />
+  <meta property="og:description" content="Modern, responsive e-commerce frontend UI template with banners, categories, product pages, cart, and account dashboard." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="{% static 'styles/css/main.css' %}" />
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="{% url 'core:index' %}" aria-label="thc-24 Home">
+        <span class="brand-badge" aria-hidden="true"></span>
+        <span>thc-24</span>
+      </a>
+
+      <div class="search" role="search">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 21l-4.3-4.3"/><circle cx="11" cy="11" r="7"/></svg>
+        <input type="search" placeholder="Search products, categories…" aria-label="Search"/>
+      </div>
+
+      <nav class="navlinks" aria-label="Primary">
+        <a class="active" href="{% url 'core:index' %}">Home</a>
+        <a class="" href="#">Shop</a>
+
+      </nav>
+
+      <div class="actions">
+
+        <a class="iconbtn" href="#" aria-label="Open cart" style="position:relative">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2"><path d="M6 6h15l-2 9H7L6 6Z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/>
+            <circle cx="18" cy="20" r="1.5"/></svg><span class="badge" aria-label="Items in cart">2</span>
+        </a>
+
+        <a class="iconbtn" href="{% url 'users:account' %}" aria-label="Account">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="8" r="4"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block content %}
+{% endblock %}
+
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <div class="brand" style="margin-bottom:10px">
+          <span class="brand-badge" aria-hidden="true"></span>
+          <span>thc-24</span>
+        </div>
+        <div class="subtle">Modern e-commerce frontend UI template (static).</div>
+        <div class="spacer"></div>
+        <small>© 2026 thc-24. All rights reserved.</small>
+      </div>
+      <div>
+        <b>Shop</b>
+        <div class="spacer"></div>
+        <div><a href="#">All products</a></div>
+        <div><a href="# {# #kits #}">Starter kits</a></div>
+        <div><a href="# {# #accessories #}">Accessories</a></div>
+      </div>
+      <div>
+        <b>Account</b>
+        <div class="spacer"></div>
+        <div><a href="#">Profile</a></div>
+        <div><a href="#{# #addresses #}">Addresses</a></div>
+        <div><a href="#{# #security #}">Security</a></div>
+      </div>
+      <div>
+        <b>Support</b>
+        <div class="spacer"></div>
+        <div><a href="{% url 'core:shipping' %}">Shipping</a></div>
+        <div><a href="{% url 'core:returns' %}">Returns</a></div>
+        <div><a href="{% url 'core:contact' %}">Contact</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<main class="container">
+<section class="section hero" style="min-height:500px;display:flex;flex-direction:column;justify-content:center;text-align:center">
+  <div class="hero-card">
+    <div class="chiprow">
+      <span class="chip">Free shipping over $60</span>
+      <span class="chip">30-day returns</span>
+      <span class="chip">Secure checkout UI</span>
+    </div>
+    <h1>Modern e‑commerce UI for a sleek online store.</h1>
+    <p>
+      A clean, fast, responsive storefront layout with banners, categories, product cards, cart page,
+      and a profile area (delivery address, personal info, password change). Static HTML + CSS.
+    </p>
+    <div class="hero-cta" style="justify-content:center">
+      <a class="btn primary" href="#">Browse products <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h12"/><path d="m13 6 6 6-6 6"/></svg></a>
+      <a class="btn" href="#">Go to account</a>
+
+    </div>
+    <div class="spacer"></div>
+    <div class="grid cols-3">
+      <div class="card pad">
+        <h3>Fast layout</h3>
+        <p>Grid-based components, modern spacing and typography, responsive breakpoints.</p>
+      </div>
+      <div class="card pad">
+        <h3>Conversion-focused</h3>
+        <p>Hero + banners, trust badges, clear CTAs, and product cards with quick actions.</p>
+      </div>
+      <div class="card pad">
+        <h3>Account ready</h3>
+        <p>Profile UI includes delivery address, personal details, and security settings.</p>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<section class="section">
+  <div class="toolbar">
+    <h2 class="h1">Shop by category</h2>
+    <div class="filters">
+      <span class="pill">Trending</span>
+      <span class="pill good">In stock</span>
+      <span class="pill warn">Limited</span>
+    </div>
+  </div>
+
+  <div class="grid cols-4">
+    <a class="card pad" href="# {# #kits #}">
+      <div class="category">
+        <div class="icon" aria-hidden="true">⚡</div>
+        <div>
+          <h3>Starter kits</h3>
+          <p>Beginner-friendly setups.</p>
+        </div>
+      </div>
+    </a>
+    <a class="card pad" href="#{# #batteries #}">
+      <div class="category">
+        <div class="icon" aria-hidden="true">🔋</div>
+        <div>
+          <h3>Batteries</h3>
+          <p>Reliable daily drivers.</p>
+        </div>
+      </div>
+    </a>
+    <a class="card pad" href="# {# #cartridges #}">
+      <div class="category">
+        <div class="icon" aria-hidden="true">🧩</div>
+        <div>
+          <h3>Cartridges</h3>
+          <p>Ceramic & refillable.</p>
+        </div>
+      </div>
+    </a>
+    <a class="card pad" href="# {# #accessories #}">
+      <div class="category">
+        <div class="icon" aria-hidden="true">🧰</div>
+        <div>
+          <h3>Accessories</h3>
+          <p>Cases, chargers, tips.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="section banners">
+  <div class="banner">
+    <img src="{% static 'assets/img/banner-1.svg' %}" alt="Promo banner placeholder" />
+    <div class="content">
+      <h3>Limited Drops</h3>
+      <p>New arrivals every week, member deals, and curated bundles.</p>
+      <div><a class="btn primary" href="#">Explore</a></div>
+    </div>
+  </div>
+  <div class="banner">
+    <img src="{% static 'assets/img/banner-2.svg' %}" alt="Delivery banner placeholder" />
+    <div class="content">
+      <h3>Fast Delivery</h3>
+      <p>Tracked shipping UI and easy returns experience.</p>
+      <div><a class="btn" href="#">Checkout UI</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="toolbar">
+    <h2 class="h1">Featured products</h2>
+    <a class="btn" href="#">View all <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h12"/><path d="m13 6 6 6-6 6"/></svg></a>
+  </div>
+
+  <div class="grid cols-4">
+
+    <article class="card product">
+      <a class="img" href="#">
+        <img src="{% static 'assets/img/p1.svg' %}" alt="Nova Pod Kit placeholder image" />
+      </a>
+      <div class="body">
+        <div class="top">
+          <div>
+            <div class="name">Nova Pod Kit</div>
+            <div class="desc">Starter kits • Premium build • Minimal design</div>
+          </div>
+          <div class="price">$39.00</div>
+        </div>
+        <div class="subrow">
+          <span class="pill good">In stock</span>
+          <a class="btn primary" href="#">Add to cart</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card product">
+      <a class="img" href="#l">
+        <img src="{% static 'assets/img/p2.svg' %}" alt="Aero Battery Pro placeholder image" />
+      </a>
+      <div class="body">
+        <div class="top">
+          <div>
+            <div class="name">Aero Battery Pro</div>
+            <div class="desc">Batteries • Premium build • Minimal design</div>
+          </div>
+          <div class="price">$24.00</div>
+        </div>
+        <div class="subrow">
+          <span class="pill good">In stock</span>
+          <a class="btn primary" href="#">Add to cart</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card product">
+      <a class="img" href="#">
+        <img src="{% static 'assets/img/p3.svg' %}" alt="Ceramic Cartridge placeholder image" />
+      </a>
+      <div class="body">
+        <div class="top">
+          <div>
+            <div class="name">Ceramic Cartridge</div>
+            <div class="desc">Cartridges • Premium build • Minimal design</div>
+          </div>
+          <div class="price">$12.00</div>
+        </div>
+        <div class="subrow">
+          <span class="pill good">In stock</span>
+          <a class="btn primary" href="#">Add to cart</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card product">
+      <a class="img" href="#">
+        <img src="{% static 'assets/img/p4.svg' %}" alt="Magnetic Charger placeholder image" />
+      </a>
+      <div class="body">
+        <div class="top">
+          <div>
+            <div class="name">Magnetic Charger</div>
+            <div class="desc">Accessories • Premium build • Minimal design</div>
+          </div>
+          <div class="price">$9.00</div>
+        </div>
+        <div class="subrow">
+          <span class="pill good">In stock</span>
+          <a class="btn primary" href="#">Add to cart</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+</main>
+{% endblock %}

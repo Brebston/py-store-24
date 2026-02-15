@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main class="container">
+  <section class="section" style="max-width:720px; margin:0 auto">
+    <div class="card pad">
+      <h1 class="h1" style="margin-top:0">Sign in</h1>
+      <p class="muted">Authentication UI (static). Connect to your auth system.</p>
+      <div class="hr"></div>
+
+      <form class="form" action="#" method="post">
+        <div class="field">
+          <label for="email">Email</label>
+          <input class="input" id="email" placeholder="you@email.com" />
+        </div>
+        <div class="field">
+          <label for="pass">Password</label>
+          <input class="input" id="pass" type="password" placeholder="••••••••" />
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+          <a class="btn primary" href="account.html">Sign in</a>
+          <a class="btn" href="#">Forgot password</a>
+          <span class="muted" style="font-size:13px">No account? <a href="register.html" style="text-decoration:underline">Create one</a></span>
+        </div>
+        <div class="help">Tip: Add reCAPTCHA + rate limiting in real production.</div>
+      </form>
+    </div>
+  </section>
+</main>
+{% endblock %}

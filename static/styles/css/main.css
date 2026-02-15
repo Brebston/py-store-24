@@ -1,0 +1,565 @@
+
+/* thc-24 UI Kit (static e-commerce demo)
+   Notes: This is a front-end UI template (no backend). Replace content/images as needed.
+*/
+
+:root{
+  --bg:#0b0f17;
+  --bg2:#070a11;
+  --card:#0f1624;
+  --card2:#0c1320;
+  --text:#e7eefc;
+  --muted:#a9b6d3;
+  --line:rgba(255,255,255,.08);
+  --accent:#7c5cff;
+  --accent2:#2ee59d;
+  --danger:#ff4d6d;
+  --warn:#ffcc66;
+  --shadow: 0 16px 40px rgba(0,0,0,.45);
+  --radius: 18px;
+  --radius2: 26px;
+  --max: 1200px;
+  --focus: 0 0 0 3px rgba(124,92,255,.35);
+
+  --grad:
+    radial-gradient(1000px 600px at 12% 0%, rgba(124,92,255,.35), transparent 55%),
+    radial-gradient(900px 500px at 88% 10%, rgba(46,229,157,.22), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,.04), transparent 30%);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background: var(--grad), linear-gradient(180deg, var(--bg), var(--bg2));
+}
+a{color:inherit; text-decoration:none}
+img{max-width:100%; display:block}
+button, input, select, textarea{font:inherit; color:inherit}
+small{color:var(--muted)}
+
+.container{max-width:var(--max); margin:0 auto; padding:0 18px}
+.section{padding:26px 0}
+.spacer{height:14px}
+
+.glass{
+  background: rgba(15,22,36,.65);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius2);
+}
+
+.topbar{
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(7,10,17,.55);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap: 14px; padding: 14px 0;
+}
+.brand{
+  display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;
+}
+.brand-badge{
+  width:34px; height:34px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(46,229,157,.85));
+  box-shadow: 0 10px 30px rgba(124,92,255,.25);
+}
+.navlinks{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.navlinks a{
+  padding: 9px 12px; border-radius: 12px; color: var(--muted);
+}
+.navlinks a:hover{background: rgba(255,255,255,.06); color: var(--text)}
+.navlinks a.active{background: rgba(124,92,255,.18); color: var(--text); border:1px solid rgba(124,92,255,.22)}
+
+.search{
+  flex: 1;
+  display:flex; align-items:center; gap:10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--line);
+  min-width: 220px;
+}
+.search svg{opacity:.8}
+.search input{
+  width:100%;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--text);
+}
+.search input::placeholder{color: rgba(169,182,211,.8)}
+.actions{display:flex; align-items:center; gap:10px}
+.iconbtn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  cursor:pointer;
+}
+.iconbtn:hover{background: rgba(255,255,255,.07)}
+.iconbtn:focus{outline:none; box-shadow: var(--focus)}
+.badge{
+  position:absolute;
+  transform: translate(14px, -14px);
+  background: rgba(124,92,255,.9);
+  border: 1px solid rgba(255,255,255,.2);
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.hero{
+  display:grid; grid-template-columns: 1.15fr .85fr; gap: 18px;
+  align-items: stretch;
+}
+.hero-card{
+  padding: 22px;
+  border-radius: var(--radius2);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  overflow:hidden;
+  position:relative;
+}
+.hero-card h1{margin:0; font-size: 42px; line-height:1.05; letter-spacing: -0.6px}
+.hero-card p{margin: 12px 0 0; color: var(--muted); max-width: 52ch}
+.hero-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top: 18px}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:10px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  cursor:pointer;
+}
+.btn:hover{background: rgba(255,255,255,.07)}
+.btn:focus{outline:none; box-shadow: var(--focus)}
+.btn.primary{
+  border-color: rgba(124,92,255,.35);
+  background: linear-gradient(135deg, rgba(124,92,255,.9), rgba(124,92,255,.55));
+}
+.btn.primary:hover{filter: brightness(1.04)}
+.btn.ghost{background: transparent}
+.chiprow{
+  display:flex; gap:8px; flex-wrap:wrap; margin-top: 16px
+}
+.chip{
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  font-size: 13px;
+}
+.hero-art{
+  padding: 0;
+  position:relative;
+  overflow:hidden;
+}
+.hero-art img{width:100%; height:100%; object-fit:cover; border-radius: var(--radius2)}
+.hero-art .overlay{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(11,15,23,0), rgba(11,15,23,.82));
+  border-radius: var(--radius2);
+}
+.hero-art .meta{
+  position:absolute; left: 18px; right: 18px; bottom: 16px;
+  display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+}
+.kpis{
+  display:flex; gap:10px; flex-wrap:wrap;
+}
+.kpi{
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(15,22,36,.55);
+  backdrop-filter: blur(10px);
+}
+.kpi b{display:block; font-size: 16px}
+.kpi span{display:block; color: var(--muted); font-size: 12px; margin-top: 2px}
+
+.grid{
+  display:grid; gap: 14px;
+}
+.grid.cols-4{grid-template-columns: repeat(4, 1fr)}
+.grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+.grid.cols-2{grid-template-columns: repeat(2, 1fr)}
+
+.card{
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+  overflow:hidden;
+}
+.card.pad{padding: 16px}
+.card h3{margin:0; font-size: 16px}
+.card p{margin: 8px 0 0; color: var(--muted); font-size: 14px}
+
+.category{
+  display:flex; gap: 12px; align-items:center;
+}
+.category .icon{
+  width: 48px; height: 48px;
+  border-radius: 16px;
+  background: rgba(124,92,255,.12);
+  border: 1px solid rgba(124,92,255,.22);
+  display:flex; align-items:center; justify-content:center;
+}
+
+.product{
+  display:flex; flex-direction:column;
+}
+.product .img{
+  aspect-ratio: 4/3;
+  background: rgba(255,255,255,.03);
+  border-bottom: 1px solid var(--line);
+}
+.product .img img{width:100%; height:100%; object-fit:cover}
+.product .body{padding: 14px}
+.product .top{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+}
+.product .name{font-weight: 700}
+.product .desc{margin-top: 6px; color: var(--muted); font-size: 13px; line-height:1.35}
+.price{
+  font-weight: 800;
+  letter-spacing:.2px;
+}
+.subrow{
+  margin-top: 12px;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+}
+.pill{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(255,255,255,.03);
+}
+.pill.good{border-color: rgba(46,229,157,.25); background: rgba(46,229,157,.10); color: rgba(226,255,246,.95)}
+.pill.warn{border-color: rgba(255,204,102,.25); background: rgba(255,204,102,.08); color: rgba(255,240,210,.95)}
+
+.toolbar{
+  display:flex; align-items:center; justify-content:space-between; gap: 12px; flex-wrap:wrap;
+  margin-bottom: 12px;
+}
+.filters{
+  display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+}
+.select, .input{
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  outline:none;
+}
+.select:focus, .input:focus{box-shadow: var(--focus)}
+.h1{font-size: 28px; margin:0}
+.muted{color: var(--muted)}
+.hr{height:1px; background: var(--line); margin: 14px 0}
+
+.footer{
+  padding: 28px 0 40px;
+  border-top: 1px solid var(--line);
+  margin-top: 30px;
+  color: var(--muted);
+}
+.footer .cols{
+  display:grid; grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  gap: 14px;
+}
+.footer a{color: var(--muted)}
+.footer a:hover{color: var(--text)}
+.subtle{opacity:.9}
+
+/* Page layouts */
+.page{
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap: 14px;
+  align-items:start;
+}
+.aside{
+  position: sticky;
+  top: 92px;
+}
+.summary{
+  padding: 16px;
+}
+.summary .row{
+  display:flex; justify-content:space-between; gap:12px; margin: 10px 0;
+  color: var(--muted);
+}
+.summary .row b{color: var(--text)}
+.note{
+  font-size: 13px;
+  color: var(--muted);
+  line-height:1.4;
+}
+
+/* Tables (cart) */
+.table{
+  width:100%;
+  border-collapse: collapse;
+  overflow:hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+.table th, .table td{
+  padding: 12px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align:left;
+  vertical-align:middle;
+}
+.table th{color: var(--muted); font-weight: 600; font-size: 13px; background: rgba(255,255,255,.02)}
+.table tr:last-child td{border-bottom:0}
+.qty{
+  display:inline-flex; align-items:center; gap: 8px;
+}
+.qty .btn-sm{
+  width: 30px; height: 30px; border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  display:flex; align-items:center; justify-content:center;
+}
+.qty input{
+  width: 44px; height: 32px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+  text-align:center;
+}
+
+/* Forms */
+.form{
+  display:grid; gap: 10px;
+}
+.field{
+  display:grid; gap: 6px;
+}
+label{font-size: 13px; color: var(--muted)}
+textarea.input{height:auto; padding: 10px 12px; min-height: 96px; resize: vertical}
+.two{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.help{
+  font-size: 12px; color: rgba(169,182,211,.85); line-height:1.35;
+}
+
+/* Banners row */
+.banners{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.banner{
+  position:relative; overflow:hidden;
+  border-radius: var(--radius2);
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+  min-height: 180px;
+}
+.banner img{width:100%; height:100%; object-fit:cover}
+.banner .content{
+  position:absolute; inset: 0;
+  padding: 16px;
+  display:flex; flex-direction:column; justify-content:flex-end; gap:10px;
+  background: linear-gradient(180deg, rgba(11,15,23,0), rgba(11,15,23,.85));
+}
+.banner h3{margin:0; font-size: 18px}
+.banner p{margin:0; color: var(--muted); font-size: 13px; max-width: 44ch}
+
+/* Responsive */
+@media (max-width: 980px){
+  .hero{grid-template-columns: 1fr}
+  .grid.cols-4{grid-template-columns: repeat(2, 1fr)}
+  .footer .cols{grid-template-columns: 1fr 1fr}
+  .page{grid-template-columns: 1fr}
+  .aside{position: static}
+}
+@media (max-width: 560px){
+  .nav{flex-wrap:wrap}
+  .search{order: 3; flex-basis: 100%}
+  .grid.cols-3{grid-template-columns: 1fr}
+  .grid.cols-2{grid-template-columns: 1fr}
+  .grid.cols-4{grid-template-columns: 1fr}
+  .banners{grid-template-columns: 1fr}
+  .two{grid-template-columns: 1fr}
+}
+
+/* Simple SVG icon style */
+.ico{width:18px; height:18px; display:inline-block; vertical-align:middle}
+
+
+/* ---------- v1.1 FIXES (UX & readability) ---------- */
+
+/* 1) Make hero image feel like a real "promo" instead of abstract blob */
+.hero-art img,
+.banner img,
+.product .img img {
+  image-rendering: auto;
+}
+
+/* Replace the placeholder label that looked like "UI template..." by hiding any stray text inside SVG on small screens */
+.hero-art .meta .kpi,
+.hero-art .meta .btn {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 2) Banners: ensure text never clashes with background */
+.banner .content{
+  background: linear-gradient(180deg, rgba(11,15,23,0.05), rgba(11,15,23,.88));
+  text-shadow: 0 6px 18px rgba(0,0,0,.55);
+}
+.banner h3{font-size:20px}
+.banner p{color: rgba(231,238,252,.85)}
+
+/* 3) Product page: constrain photo area + fill card nicely */
+.product-page-media{
+  aspect-ratio: 4/3;
+  width: 100%;
+  max-width: 520px;
+  border-radius: var(--radius2);
+  overflow:hidden;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.02);
+}
+.product-page-media img{
+  width:100%;
+  height:100%;
+  object-fit: cover; /* no black bars */
+}
+
+/* 3b) Generic product card image height uniformity */
+.product .img{
+  aspect-ratio: 4/3;
+}
+.product .img img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+}
+
+/* 3c) Dropdown: fix low-contrast options in some browsers */
+select.select, select.select option{
+  color: var(--text);
+}
+select.select{
+  background: rgba(15,22,36,.9);
+}
+select.select option{
+  background: #0f1624;
+}
+
+/* 4) Support pages typography */
+.prose{
+  line-height: 1.65;
+  color: rgba(231,238,252,.88);
+}
+.prose h1{margin:0 0 10px}
+.prose h2{margin:18px 0 8px}
+.prose p{margin:8px 0}
+.prose ul{margin:8px 0 0 18px}
+.prose li{margin:6px 0}
+
+.banner .content{position:absolute; z-index:2}
+.banner img{position:relative; z-index:1}
+
+
+/* -------- HERO v3 -------- */
+
+.clean-hero{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:380px;
+  border-radius:26px;
+  background:linear-gradient(135deg,#141c2c,#0d1320);
+  border:1px solid rgba(255,255,255,.08);
+  padding:40px;
+  text-align:center;
+}
+
+.hero-promo h2{
+  font-size:32px;
+  margin:0 0 10px;
+}
+
+.hero-promo p{
+  max-width:520px;
+  margin:auto;
+  color:rgba(231,238,252,.85);
+}
+
+
+/* -------- v4 layout adjustments -------- */
+
+.hero h1{
+  max-width:800px;
+  margin:auto;
+}
+
+.hero p{
+  max-width:700px;
+  margin:20px auto 0;
+}
+
+.banners .banner{
+  max-width:520px;
+  flex:1;
+  text-align:center;
+}
+
+.banners .banner .content{
+  align-items:center;
+}
+
+
+/* -------- v7 Banner layout fixes -------- */
+.banners{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+@media (max-width: 560px){
+  .banners{ grid-template-columns: 1fr; }
+}
+
+/* Keep image + overlay, but center content nicely */
+.banner{
+  min-height: 220px;
+}
+.banner img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+}
+.banner .content{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;   /* vertical center */
+  align-items:center;       /* horizontal center */
+  text-align:center;
+  gap: 10px;
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(11,15,23,0.08), rgba(11,15,23,.86));
+}
+.banner .content h3{margin:0; font-size:20px}
+.banner .content p{margin:0; max-width: 46ch}

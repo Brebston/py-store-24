@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main class="container">
+  <section class="section">
+    <div class="toolbar">
+      <div>
+        <h1 class="h1">Account</h1>
+        <div class="muted">Profile UI: delivery address, personal details, password change.</div>
+      </div>
+      <a class="btn" href="login.html">Log out</a>
+    </div>
+
+    <div class="grid cols-2">
+      <div class="card pad" id="profile">
+        <h3>Personal details</h3>
+        <div class="spacer"></div>
+
+        <form class="form" action="#" method="post">
+          <div class="two">
+            <div class="field">
+              <label for="fname">First name</label>
+              <input class="input" id="fname" placeholder="Alex" />
+            </div>
+            <div class="field">
+              <label for="lname">Last name</label>
+              <input class="input" id="lname" placeholder="Johnson" />
+            </div>
+          </div>
+
+          <div class="two">
+            <div class="field">
+              <label for="email">Email</label>
+              <input class="input" id="email" placeholder="alex@email.com" />
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input class="input" id="phone" placeholder="+1 555 123 456" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Order notes (optional)</label>
+            <textarea class="input" id="notes" placeholder="Delivery instructions, gate code, etc."></textarea>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn primary" type="button">Save changes</button>
+            <button class="btn" type="button">Cancel</button>
+          </div>
+          <div class="help">Static UI only. Wire up form submit in your backend.</div>
+        </form>
+      </div>
+
+      <div class="card pad" id="addresses">
+        <h3>Delivery address</h3>
+        <div class="spacer"></div>
+
+        <form class="form" action="#" method="post">
+          <div class="field">
+            <label for="line1">Address line</label>
+            <input class="input" id="line1" placeholder="Street, building, apartment" />
+          </div>
+
+          <div class="two">
+            <div class="field">
+              <label for="city">City</label>
+              <input class="input" id="city" placeholder="Warsaw" />
+            </div>
+            <div class="field">
+              <label for="zip">ZIP</label>
+              <input class="input" id="zip" placeholder="00-001" />
+            </div>
+          </div>
+
+          <div class="two">
+            <div class="field">
+              <label for="state">State/Region</label>
+              <input class="input" id="state" placeholder="Mazowieckie" />
+            </div>
+            <div class="field">
+              <label for="country">Country</label>
+              <input class="input" id="country" placeholder="Poland" />
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn primary" type="button">Add / Update address</button>
+            <button class="btn" type="button">Set as default</button>
+          </div>
+
+          <div class="help">You can store multiple addresses in your real app; this is a single-address UI.</div>
+        </form>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="card pad" id="security">
+      <div class="toolbar" style="margin-bottom:0">
+        <div>
+          <h3>Security</h3>
+          <div class="muted">Change password UI</div>
+        </div>
+        <span class="pill">2FA (UI placeholder)</span>
+      </div>
+
+      <div class="spacer"></div>
+
+      <form class="form" action="#" method="post">
+        <div class="two">
+          <div class="field">
+            <label for="old">Current password</label>
+            <input class="input" id="old" type="password" placeholder="••••••••" />
+          </div>
+          <div class="field">
+            <label for="new">New password</label>
+            <input class="input" id="new" type="password" placeholder="Min 8 characters" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="repeat">Repeat new password</label>
+          <input class="input" id="repeat" type="password" placeholder="Repeat new password" />
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <button class="btn primary" type="button">Update password</button>
+          <button class="btn" type="button" style="border-color:rgba(255,77,109,.25)">Reset via email</button>
+        </div>
+
+        <div class="help">Use secure password rules + hashing in backend. This is UI only.</div>
+      </form>
+    </div>
+  </section>
+
+</main>
+{% endblock %}

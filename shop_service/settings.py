@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "catalog",
     "orders",
     "promotions",
+    "core",
 ]
 
 MIDDLEWARE = [

@@ -4,10 +4,12 @@
     {{ field }}
 
     {% if field.errors %}
-        <div class="form-errors">
-            {% for error in field.errors %}
-                <div class="form-error">{{ error }}</div>
-            {% endfor %}
-        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                {% for error in field.errors %}
+                    showErrorPopup("{{ error|escapejs }}");
+                {% endfor %}
+            });
+        </script>
     {% endif %}
 </div>

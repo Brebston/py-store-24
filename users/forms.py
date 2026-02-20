@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from users.models import User
+from users.models import Address, User
+
+from phonenumber_field.formfields import PhoneNumberField
 
 
 class RegisterForm(UserCreationForm):
@@ -66,5 +68,60 @@ class LoginForm(AuthenticationForm):
         widget=forms.PasswordInput(attrs={
             "class": "input",
             "placeholder": "••••••••"
+        })
+    )
+
+
+class ProfileUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = (
+            "first_name",
+            "last_name",
+            "email",
+            "phone",
+            "notes",
+        )
+
+    first_name = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            "class": "input",
+            "placeholder": "Alex",
+        })
+    )
+
+    last_name = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            "class": "input",
+            "placeholder": "Johnson"
+        })
+    )
+
+    email = forms.EmailField(
+        required=False,
+        widget=forms.EmailInput(attrs={
+            "class": "input",
+            "placeholder": "user@email.com"
+        })
+    )
+
+    phone = PhoneNumberField(
+        region="PL",
+        required=False,
+        widget=forms.TextInput(attrs={
+            "class": "input",
+            "placeholder": "+1 555 123 456"
+        })
+    )
+
+    notes = forms.CharField(
+        required=False,
+        label="Order notes (optional)",
+        widget=forms.Textarea(attrs={
+            "class": "input",
+            "placeholder": "Delivery instructions, gate code, etc."
         })
     )

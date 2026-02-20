@@ -22,7 +22,7 @@
         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
           <button class="btn primary" type="submit">Sign in</button>
           <a class="btn" href="#">Forgot password</a>
-          <span class="muted" style="font-size:13px">No account? <a href="register.html" style="text-decoration:underline">Create one</a></span>
+          <span class="muted" style="font-size:13px">No account? <a href="{% url 'users:register' %}" style="text-decoration:underline">Create one</a></span>
         </div>
       </form>
     </div>

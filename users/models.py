@@ -45,6 +45,8 @@ class UserManager(DjangoUserManager):
 class User(AbstractUser):
     username = None
     email = models.EmailField(_("email address"), unique=True)
+    phone = models.CharField(max_length=20, blank=True)
+    notes = models.TextField(blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -61,8 +63,10 @@ class Address(models.Model):
     country = models.CharField(max_length=65)
     city = models.CharField(max_length=120)
     postal_code = models.CharField(max_length=20)
+    phone = models.CharField(max_length=20)
     street = models.CharField(max_length=255)
     state = models.CharField(max_length=120)
+    notes = models.TextField(blank=True)
 
     is_default = models.BooleanField(default=True)
 

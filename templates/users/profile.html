@@ -19,39 +19,37 @@
         <h3>Personal details</h3>
         <div class="spacer"></div>
 
-        <form class="form" action="#" method="post">
-          <div class="two">
-            <div class="field">
-              <label for="fname">First name</label>
-              <input class="input" id="fname" placeholder="Alex" />
-            </div>
-            <div class="field">
-              <label for="lname">Last name</label>
-              <input class="input" id="lname" placeholder="Johnson" />
-            </div>
-          </div>
+        {% if messages %}
+          {% for message in messages %}
+              {% if "success" in message.tags %}
+                  <div class="form-global-success">
+                      {{ message }}
+                  </div>
+              {% endif %}
+          {% endfor %}
+        {% endif %}
+        <form class="form" method="post">
+          {% csrf_token %}
 
           <div class="two">
-            <div class="field">
-              <label for="email">Email</label>
-              <input class="input" id="email" placeholder="user@email.com" />
-            </div>
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input class="input" id="phone" placeholder="+1 555 123 456" />
-            </div>
+            {% include "components/form_field.html" with field=profile_form.first_name %}
+            {% include "components/form_field.html" with field=profile_form.last_name %}
           </div>
 
-          <div class="field">
-            <label for="notes">Order notes (optional)</label>
-            <textarea class="input" id="notes" placeholder="Delivery instructions, gate code, etc."></textarea>
+          <div class="two">
+            {% include "components/form_field.html" with field=profile_form.email %}
+            {% include "components/form_field.html" with field=profile_form.phone %}
           </div>
 
+            <!-- Order notes -->
+            {% include "components/form_field.html" with field=profile_form.notes %}
+            <!-- End order notes -->
+
+          <br>
           <div style="display:flex; gap:10px; flex-wrap:wrap">
-            <button class="btn primary" type="button">Save changes</button>
-            <button class="btn" type="button">Cancel</button>
+            <button class="btn primary" name="profile-submit" type="submit">Save changes</button>
+            <button class="btn" type="reset">Cancel</button>
           </div>
-          <div class="help">Static UI only. Wire up form submit in your backend.</div>
         </form>
       </div>
 
@@ -64,13 +62,25 @@
             <div class="field">
               <label for="fname">First name</label>
               <input class="input" id="fname" placeholder="Alex" />
+            </div>
+
+            <div class="field">
+              <label for="lname">Last name</label>
+              <input class="input" id="lname" placeholder="Johnson" />
+            </div>
           </div>
 
-          <div class="field">
-            <label for="lname">Last name</label>
-            <input class="input" id="lname" placeholder="Johnson" />
+          <div class="two">
+            <div class="field">
+              <label for="email">Email</label>
+              <input class="input" id="email" placeholder="email@email.com" />
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input class="input" id="phone" placeholder="+48 123 456 789">
+            </div>
           </div>
-        </div>
+
           <div class="field">
             <label for="line1">Address line</label>
             <input class="input" id="line1" placeholder="Street, building, apartment" />

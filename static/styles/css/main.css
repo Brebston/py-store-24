@@ -566,13 +566,32 @@ select.select option{
 .banner .content h3{margin:0; font-size:20px}
 .banner .content p{margin:0; max-width: 46ch}
 
-.form-errors {
-    margin-top: 6px;
+.error-popup {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #ff4d4f;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 9999;
 }
 
-.form-error {
-    color: #ff6b6b;
-    font-size: 14px;
-    line-height: 1.4;
+.error-popup.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
+.form-global-success {
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    background: #dcfce7;
+    color: #166534;
+    border-left: 4px solid #22c55e;
+    border-radius: 8px;
+    font-weight: 500;
+}

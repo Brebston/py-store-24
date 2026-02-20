@@ -125,3 +125,77 @@ class ProfileUpdateForm(forms.ModelForm):
             "placeholder": "Delivery instructions, gate code, etc."
         })
     )
+
+
+class ProfileAddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+            "phone",
+            "street",
+            "postal_code",
+            "city",
+            "state",
+            "country",
+            "notes",
+            "is_default",
+        ]
+
+        widgets = {
+            "first_name": forms.TextInput(attrs={
+                "class": "input",
+                "placeholder": "John"
+            }),
+            "last_name": forms.TextInput(attrs={
+                "class": "input",
+                "placeholder": "Doe"
+            }),
+            "email": forms.EmailInput(attrs={
+                "class": "input",
+                "placeholder": "john@example.com"
+            }),
+            "phone": forms.TextInput(attrs={
+                "class": "input",
+                "placeholder": "+48 123 456 789"
+            }),
+            "street": forms.TextInput(attrs={
+                "class": "input",
+                "placeholder": "Street name 123"
+            }),
+            "postal_code": forms.TextInput(attrs={
+                "class": "input",
+                "placeholder": "00-000"
+            }),
+            "city": forms.TextInput(attrs={
+                "class": "input",
+                "placeholder": "Warsaw"
+            }),
+            "state": forms.TextInput(attrs={
+                "class": "input",
+                "placeholder": "Mazowieckie"
+            }),
+            "country": forms.TextInput(attrs={
+                "class": "input",
+                "placeholder": "Poland"
+            }),
+            "notes": forms.Textarea(attrs={
+                "class": "input",
+                "placeholder": "Floor, door code, delivery instructions...",
+                "rows": 3
+            }),
+            "is_default": forms.CheckboxInput(attrs={
+                "style": "width:18px;height:18px;cursor:pointer;"
+            }),
+        }
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get("phone", "")
+        phone = phone.strip()
+        return phone
+
+    def clean_postal_code(self):
+        postal = self.cleaned_data.get("postal_code", "")
+        return postal.strip()

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="container">
+  <section class="section">
+    <div class="toolbar">
+      <div>
+        <h2 class="h1">
+          {% if object %}Edit address{% else %}Add address{% endif %}
+        </h2>
+        <div class="muted">Use a real delivery address. You can set one address as default.</div>
+      </div>
+
+      <a class="btn" href="{% url 'users:address_list' %}">
+        Back
+      </a>
+    </div>
+
+    <div class="card pad">
+      <form method="post" class="form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="card pad" style="border-color: rgba(255,77,109,.35); background: rgba(255,77,109,.08)">
+            <b>Fix errors:</b>
+            <div class="spacer"></div>
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+
+        <div class="two">
+          <div class="field">
+            <label for="{{ form.first_name.id_for_label }}">First name</label>
+            {{ form.first_name }}
+            {% if form.first_name.errors %}<small style="color:var(--danger)">{{ form.first_name.errors|striptags }}</small>{% endif %}
+          </div>
+
+          <div class="field">
+            <label for="{{ form.last_name.id_for_label }}">Last name</label>
+            {{ form.last_name }}
+            {% if form.last_name.errors %}<small style="color:var(--danger)">{{ form.last_name.errors|striptags }}</small>{% endif %}
+          </div>
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}<small style="color:var(--danger)">{{ form.email.errors|striptags }}</small>{% endif %}
+          </div>
+
+          <div class="field">
+            <label for="{{ form.phone.id_for_label }}">Phone</label>
+            {{ form.phone }}
+            {% if form.phone.errors %}<small style="color:var(--danger)">{{ form.phone.errors|striptags }}</small>{% endif %}
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="{{ form.street.id_for_label }}">Street address</label>
+          {{ form.street }}
+          {% if form.street.errors %}<small style="color:var(--danger)">{{ form.street.errors|striptags }}</small>{% endif %}
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="{{ form.postal_code.id_for_label }}">Postal code</label>
+            {{ form.postal_code }}
+            {% if form.postal_code.errors %}<small style="color:var(--danger)">{{ form.postal_code.errors|striptags }}</small>{% endif %}
+          </div>
+
+          <div class="field">
+            <label for="{{ form.city.id_for_label }}">City</label>
+            {{ form.city }}
+            {% if form.city.errors %}<small style="color:var(--danger)">{{ form.city.errors|striptags }}</small>{% endif %}
+          </div>
+        </div>
+
+        <div class="two">
+          <div class="field">
+            <label for="{{ form.state.id_for_label }}">State/Region</label>
+            {{ form.state }}
+            {% if form.state.errors %}<small style="color:var(--danger)">{{ form.state.errors|striptags }}</small>{% endif %}
+          </div>
+
+          <div class="field">
+            <label for="{{ form.country.id_for_label }}">Country</label>
+            {{ form.country }}
+            {% if form.country.errors %}<small style="color:var(--danger)">{{ form.country.errors|striptags }}</small>{% endif %}
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="{{ form.notes.id_for_label }}">Notes (optional)</label>
+          {{ form.notes }}
+          {% if form.notes.errors %}<small style="color:var(--danger)">{{ form.notes.errors|striptags }}</small>{% endif %}
+          <div class="help">For example: floor, door code, delivery instructions.</div>
+        </div>
+
+        <div class="field" style="display:flex;align-items:center;gap:10px">
+          {{ form.is_default }}
+          <label for="{{ form.is_default.id_for_label }}" style="margin:0">Make this my default address</label>
+        </div>
+
+        <div class="hr"></div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+          <a class="btn" href="{% url 'users:address_list' %}">Cancel</a>
+          <button class="btn primary" type="submit">
+            Save
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/>
+              <path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

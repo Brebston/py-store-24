@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="container">
+  <section class="section">
+    <div class="toolbar">
+      <div>
+        <h2 class="h1">My addresses</h2>
+        <div class="muted">Add, edit, delete and set a default delivery address.</div>
+      </div>
+
+      <a class="btn primary" href="{% url 'users:address_add' %}">
+        Add address
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14"/><path d="M5 12h14"/>
+        </svg>
+      </a>
+    </div>
+
+    {% if addresses %}
+      <div class="grid cols-2">
+        {% for address in addresses %}
+          <article class="card pad">
+            <div class="toolbar" style="margin-bottom:8px">
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                {% if address.is_default %}
+                  <span class="pill good">Default</span>
+                {% else %}
+                  <span class="pill">Saved</span>
+                {% endif %}
+              </div>
+
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                {% if not address.is_default %}
+                  <a class="btn" href="{% url 'users:address_default' address.pk %}">
+                    Set default
+                  </a>
+                {% endif %}
+
+                <a class="btn" href="{% url 'users:address_edit' address.pk %}">
+                  Edit
+                </a>
+                <a class="btn" href="{% url 'users:address_delete' address.pk %}">
+                  Delete
+                </a>
+              </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <div style="display:grid;gap:10px">
+              <div>
+                <div style="font-weight:800">{{ address.first_name }} {{ address.last_name }}</div>
+                <div class="muted" style="margin-top:2px">{{ address.email }}</div>
+                <div class="muted" style="margin-top:2px">{{ address.phone }}</div>
+              </div>
+
+              <div>
+                <div style="font-weight:700">Address</div>
+                <div class="muted" style="margin-top:4px;line-height:1.5">
+                  {{ address.street }}<br>
+                  {{ address.postal_code }} {{ address.city }}{% if address.state %}, {{ address.state }}{% endif %}<br>
+                  {{ address.country }}
+                </div>
+              </div>
+
+              {% if address.notes %}
+                <div>
+                  <div style="font-weight:700">Notes</div>
+                  <div class="muted" style="margin-top:4px;line-height:1.5">{{ address.notes }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="card pad" style="text-align:center">
+        <h3 style="margin:0 0 6px">No addresses yet</h3>
+        <p class="muted" style="margin:0 0 14px">Add a delivery address to speed up checkout.</p>
+        <a class="btn primary" href="{% url 'users:address_add' %}">Add your first address</a>
+      </div>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

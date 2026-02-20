@@ -19,7 +19,7 @@
         {% if "success" in message.tags %}
           <div class="form-global-success">
             {{ message }}
-          </div>
+            </div>
           {% endif %}
       {% endfor %}
     {% endif %}
@@ -41,10 +41,6 @@
             {% include "components/form_field.html" with field=profile_form.phone %}
           </div>
 
-            <!-- Order notes -->
-            {% include "components/form_field.html" with field=profile_form.notes %}
-            <!-- End order notes -->
-
           <br>
           <div style="display:flex; gap:10px; flex-wrap:wrap">
             <button class="btn primary" name="profile-submit" type="submit">Save changes</button>
@@ -53,45 +49,65 @@
         </form>
       </div>
 
-      <div class="card pad" id="addresses">
-        <h3>Delivery address</h3>
-        <div class="spacer"></div>
+      <div class="card pad">
+        <div class="toolbar">
+          <h3 style="margin:0">My addresses</h3>
+          <a class="btn primary" href="{% url 'users:address_add' %}">
+            Add address
+          </a>
+        </div>
 
-        <form class="form" method="post">
-          {% csrf_token %}
+        {% if request.user.addresses.all %}
+          <div style="display:grid;gap:14px;margin-top:14px">
 
-          <div class="two">
-            {% include "components/form_field.html" with field=address_form.first_name %}
-            {% include "components/form_field.html" with field=address_form.last_name %}
+            {% for address in request.user.addresses.all %}
+              <div class="card pad" style="background: rgba(255,255,255,.02)">
+
+                <div class="toolbar" style="margin-bottom:8px">
+                  <div>
+                    <b>{{ address.first_name }} {{ address.last_name }}</b>
+                    {% if address.is_default %}
+                      <span class="pill good" style="margin-left:8px">Default</span>
+                    {% endif %}
+                  </div>
+
+                  <div style="display:flex;gap:8px">
+                    <a class="btn" href="{% url 'users:address_edit' address.pk %}">
+                      Edit
+                    </a>
+
+                    {% if not address.is_default %}
+                      <a class="btn" href="{% url 'users:address_default' address.pk %}">
+                        Set default
+                      </a>
+                    {% endif %}
+
+                    <a class="btn" href="{% url 'users:address_delete' address.pk %}">
+                      Delete
+                    </a>
+                  </div>
+                </div>
+
+                <div class="muted" style="line-height:1.5">
+                  {{ address.street }}<br>
+                  {{ address.postal_code }} {{ address.city }}{% if address.state %}, {{ address.state }}{% endif %}<br>
+                  {{ address.country }}<br>
+                  {{ address.phone }} • {{ address.email }}
+                </div>
+
+              </div>
+            {% endfor %}
+
           </div>
 
-          <div class="two">
-            {% include "components/form_field.html" with field=address_form.email %}
-            {% include "components/form_field.html" with field=address_form.phone %}
+        {% else %}
+          <div class="card pad" style="margin-top:14px;text-align:center">
+            <p class="muted">No addresses yet.</p>
+            <a class="btn primary" href="{% url 'users:address_add' %}">
+              Add your first address
+            </a>
           </div>
-
-            <!-- Street form field -->
-            {% include "components/form_field.html" with field=address_form.street %}
-            <!-- End street form field -->
-
-
-          <div class="two">
-            {% include "components/form_field.html" with field=address_form.city %}
-            {% include "components/form_field.html" with field=address_form.postal_code %}
-          </div>
-
-          <div class="two">
-            {% include "components/form_field.html" with field=address_form.state %}
-            {% include "components/form_field.html" with field=address_form.country %}
-          </div>
-
-          <div style="display:flex; gap:10px; flex-wrap:wrap">
-            <button class="btn primary" name="address-submit" type="submit">Add / Update address</button>
-            <button class="btn" type="button">Set as default</button>
-          </div>
-
-          <div class="help">You can store multiple addresses in your real app; this is a single-address UI.</div>
-        </form>
+        {% endif %}
       </div>
     </div>
 

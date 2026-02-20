@@ -14,20 +14,20 @@
       </form>
     </div>
 
+    {% if messages %}
+      {% for message in messages %}
+        {% if "success" in message.tags %}
+          <div class="form-global-success">
+            {{ message }}
+          </div>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
     <div class="grid cols-2">
       <div class="card pad" id="profile">
         <h3>Personal details</h3>
         <div class="spacer"></div>
 
-        {% if messages %}
-          {% for message in messages %}
-              {% if "success" in message.tags %}
-                  <div class="form-global-success">
-                      {{ message }}
-                  </div>
-              {% endif %}
-          {% endfor %}
-        {% endif %}
         <form class="form" method="post">
           {% csrf_token %}
 
@@ -57,59 +57,36 @@
         <h3>Delivery address</h3>
         <div class="spacer"></div>
 
-        <form class="form" action="#" method="post">
-          <div class="two">
-            <div class="field">
-              <label for="fname">First name</label>
-              <input class="input" id="fname" placeholder="Alex" />
-            </div>
+        <form class="form" method="post">
+          {% csrf_token %}
 
-            <div class="field">
-              <label for="lname">Last name</label>
-              <input class="input" id="lname" placeholder="Johnson" />
-            </div>
+          <div class="two">
+            {% include "components/form_field.html" with field=address_form.first_name %}
+            {% include "components/form_field.html" with field=address_form.last_name %}
           </div>
 
           <div class="two">
-            <div class="field">
-              <label for="email">Email</label>
-              <input class="input" id="email" placeholder="email@email.com" />
-            </div>
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input class="input" id="phone" placeholder="+48 123 456 789">
-            </div>
+            {% include "components/form_field.html" with field=address_form.email %}
+            {% include "components/form_field.html" with field=address_form.phone %}
           </div>
 
-          <div class="field">
-            <label for="line1">Address line</label>
-            <input class="input" id="line1" placeholder="Street, building, apartment" />
+            <!-- Street form field -->
+            {% include "components/form_field.html" with field=address_form.street %}
+            <!-- End street form field -->
+
+
+          <div class="two">
+            {% include "components/form_field.html" with field=address_form.city %}
+            {% include "components/form_field.html" with field=address_form.postal_code %}
           </div>
 
           <div class="two">
-            <div class="field">
-              <label for="city">City</label>
-              <input class="input" id="city" placeholder="Warsaw" />
-            </div>
-            <div class="field">
-              <label for="zip">ZIP</label>
-              <input class="input" id="zip" placeholder="00-001" />
-            </div>
-          </div>
-
-          <div class="two">
-            <div class="field">
-              <label for="state">State/Region</label>
-              <input class="input" id="state" placeholder="Mazowieckie" />
-            </div>
-            <div class="field">
-              <label for="country">Country</label>
-              <input class="input" id="country" placeholder="Poland" />
-            </div>
+            {% include "components/form_field.html" with field=address_form.state %}
+            {% include "components/form_field.html" with field=address_form.country %}
           </div>
 
           <div style="display:flex; gap:10px; flex-wrap:wrap">
-            <button class="btn primary" type="button">Add / Update address</button>
+            <button class="btn primary" name="address-submit" type="submit">Add / Update address</button>
             <button class="btn" type="button">Set as default</button>
           </div>
 

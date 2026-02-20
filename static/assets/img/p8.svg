@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="675" viewBox="0 0 900 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f1624"/>
+      <stop offset="1" stop-color="#0b0f17"/>
+    </linearGradient>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+  <rect width="900" height="675" fill="url(#bg)"/>
+  <g filter="url(#blur)">
+    <rect x="594" y="272" width="157" height="133" rx="34" fill="#7c5cff" opacity="0.09746882927872794"/><rect x="613" y="398" width="151" height="68" rx="17" fill="#2ee59d" opacity="0.10489031060350767"/><rect x="489" y="189" width="208" height="121" rx="41" fill="#7c5cff" opacity="0.09375414132956192"/><rect x="624" y="91" width="115" height="90" rx="25" fill="#2ee59d" opacity="0.16828050919292017"/><rect x="605" y="346" width="133" height="124" rx="50" fill="#7c5cff" opacity="0.0923500398415745"/><rect x="714" y="95" width="159" height="144" rx="21" fill="#2ee59d" opacity="0.13072885672731402"/><rect x="545" y="387" width="116" height="144" rx="48" fill="#7c5cff" opacity="0.171997502249764"/><rect x="78" y="281" width="175" height="53" rx="38" fill="#2ee59d" opacity="0.08502956655584665"/><rect x="548" y="251" width="81" height="143" rx="31" fill="#7c5cff" opacity="0.09170895811678217"/>
+  </g>
+  <g>
+    <rect x="70" y="70" width="340" height="500" rx="52" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
+    <rect x="120" y="120" width="240" height="400" rx="48" fill="rgba(124,92,255,0.12)" stroke="rgba(124,92,255,0.25)"/>
+    <rect x="190" y="160" width="100" height="320" rx="40" fill="rgba(46,229,157,0.16)" stroke="rgba(46,229,157,0.25)"/>
+    <circle cx="240" cy="210" r="16" fill="rgba(255,255,255,0.22)"/>
+  </g>
+  <g>
+    <text x="460" y="240" fill="#e7eefc" font-size="44" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="800">Care Kit</text>
+    <text x="460" y="290" fill="#a9b6d3" font-size="22" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">Maintenance</text>
+    <text x="460" y="360" fill="#2ee59d" font-size="34" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-weight="800">$11.00</text>
+    <text x="460" y="410" fill="rgba(169,182,211,0.9)" font-size="18" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">High-quality, modern product card image (placeholder).</text>
+  </g>
+</svg>

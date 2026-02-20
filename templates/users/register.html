@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main class="container" style="max-width:600px;margin:60px auto">
+  <div class="card pad">
+    <h1>Create Account</h1>
+    <p class="muted">Register to manage orders and delivery details.</p>
+
+    <form method="post" class="form" style="margin-top:20px">
+      {% csrf_token %}
+
+      {% include "components/form_field.html" with field=form.first_name %}
+      {% include "components/form_field.html" with field=form.last_name %}
+      {% include "components/form_field.html" with field=form.email %}
+      {% include "components/form_field.html" with field=form.password1 %}
+      {% include "components/form_field.html" with field=form.password2 %}
+
+      <div style="margin-top:20px">
+        <button class="btn primary" type="submit" style="width:100%">Create Account</button>
+      </div>
+
+      <div style="margin-top:15px;text-align:center">
+        <span class="muted">Already have an account?</span>
+        <a href="login.html" style="text-decoration:underline">Sign in</a>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}

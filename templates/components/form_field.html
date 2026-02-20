@@ -1,0 +1,15 @@
+<div class="field">
+    <label>{{ field.label }}</label>
+
+    {{ field }}
+
+    {% if field.errors %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                {% for error in field.errors %}
+                    showErrorPopup("{{ error|escapejs }}");
+                {% endfor %}
+            });
+        </script>
+    {% endif %}
+</div>

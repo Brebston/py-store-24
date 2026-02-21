@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, UserCreationForm
 
 from users.models import Address, User
 
@@ -199,3 +199,29 @@ class ProfileAddressForm(forms.ModelForm):
     def clean_postal_code(self):
         postal = self.cleaned_data.get("postal_code", "")
         return postal.strip()
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["old_password"].widget = forms.PasswordInput(attrs={
+            "autocomplete": "current-password",
+            "placeholder": "••••••••",
+            "class": "input"
+        })
+
+        self.fields["new_password1"].widget = forms.PasswordInput(attrs={
+            "autocomplete": "new-password",
+            "placeholder": "Min 8 characters",
+            "class": "input"
+
+        })
+        self.fields["new_password1"].label = "New password"
+
+        self.fields["new_password2"].widget = forms.PasswordInput(attrs={
+            "autocomplete": "new-password",
+            "placeholder": "Repeat new password",
+            "class": "input"
+        })
+        self.fields["new_password2"].label = "Repeat new password"

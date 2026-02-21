@@ -219,6 +219,22 @@ small{color:var(--muted)}
 .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
 .grid.cols-2{grid-template-columns: repeat(2, 1fr)}
 
+.profile-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:20px;
+}
+
+.profile-grid > .card{
+  align-self:start;
+}
+
+@media (max-width: 900px){
+  .profile-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
 .card{
   border-radius: var(--radius);
   border: 1px solid var(--line);
@@ -307,7 +323,6 @@ small{color:var(--muted)}
 .footer a:hover{color: var(--text)}
 .subtle{opacity:.9}
 
-/* Page layouts */
 .page{
   display:grid;
   grid-template-columns: 1fr 360px;
@@ -610,4 +625,26 @@ select.select option{
     border-left: 4px solid #22c55e;
     border-radius: 8px;
     font-weight: 500;
+}
+
+.address-list{
+  display:grid;
+  gap:14px;
+  margin-top:14px;
+
+  max-height: 420px;  /* ≈ 3 адреси */
+  overflow-y: auto;
+  padding-right:6px;
+}
+
+/* красивий scrollbar */
+.address-list::-webkit-scrollbar{
+  width:6px;
+}
+.address-list::-webkit-scrollbar-thumb{
+  background: rgba(124,92,255,.4);
+  border-radius:999px;
+}
+.address-list::-webkit-scrollbar-track{
+  background: transparent;
 }

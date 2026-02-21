@@ -3,8 +3,13 @@ from django.contrib.auth.views import LogoutView
 
 from users.views import (
     AccountView,
-    AddressCreateView, AddressDeleteView, AddressListView, AddressUpdateView, UserLoginView,
-    RegisterView, set_default_address,
+    AddressCreateView,
+    AddressDeleteView,
+    AddressListView,
+    AddressUpdateView,
+    UserLoginView,
+    RegisterView,
+    set_default_address,
 )
 
 app_name = "users"

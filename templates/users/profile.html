@@ -23,8 +23,8 @@
           {% endif %}
       {% endfor %}
     {% endif %}
-    <div class="grid cols-2">
-      <div class="card pad" id="profile">
+    <div class="profile-grid">
+      <div class="card pad">
         <h3>Personal details</h3>
         <div class="spacer"></div>
 
@@ -58,7 +58,7 @@
         </div>
 
         {% if request.user.addresses.all %}
-          <div style="display:grid;gap:14px;margin-top:14px">
+          <div class="address-list">
 
             {% for address in request.user.addresses.all %}
               <div class="card pad" style="background: rgba(255,255,255,.02)">
@@ -124,25 +124,20 @@
 
       <div class="spacer"></div>
 
-      <form class="form" action="#" method="post">
+      <form class="form" method="post">
+        {% csrf_token %}
+
         <div class="two">
-          <div class="field">
-            <label for="old">Current password</label>
-            <input class="input" id="old" type="password" placeholder="••••••••" />
-          </div>
-          <div class="field">
-            <label for="new">New password</label>
-            <input class="input" id="new" type="password" placeholder="Min 8 characters" />
-          </div>
+          {% include "components/form_field.html" with field=password_form.old_password %}
+          {% include "components/form_field.html" with field=password_form.new_password1 %}
         </div>
 
         <div class="field">
-          <label for="repeat">Repeat new password</label>
-          <input class="input" id="repeat" type="password" placeholder="Repeat new password" />
+          {% include "components/form_field.html" with field=password_form.new_password2 %}
         </div>
 
         <div style="display:flex; gap:10px; flex-wrap:wrap">
-          <button class="btn primary" type="button">Update password</button>
+          <button class="btn primary" name="password-submit" type="submit">Update password</button>
           <button class="btn" type="button" style="border-color:rgba(255,77,109,.25)">Reset via email</button>
         </div>
 

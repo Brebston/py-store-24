@@ -1,13 +1,29 @@
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import (
+    get_object_or_404,
+    redirect,
+    render
+)
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    ListView,
+    UpdateView
+)
 from django.contrib import messages
 
-from users.forms import LoginForm, ProfileAddressForm, ProfileUpdateForm, RegisterForm
+from users.forms import (
+    CustomPasswordChangeForm,
+    LoginForm,
+    ProfileAddressForm,
+    ProfileUpdateForm,
+    RegisterForm,
+)
 from users.mixins.mixins import AnonymousRequiredMixin
 from users.models import Address
 
@@ -26,6 +42,9 @@ class AccountView(LoginRequiredMixin, View):
             "address_form": ProfileAddressForm(
                 instance=address,
                 prefix="address"
+            ),
+            "password_form": CustomPasswordChangeForm(
+                user=request.user
             )
         }
         return render(request, self.template_name, context)
@@ -42,6 +61,10 @@ class AccountView(LoginRequiredMixin, View):
             request.POST,
             instance=address,
             prefix="address"
+        )
+        password_form = CustomPasswordChangeForm(
+            user=request.user,
+            data=request.POST
         )
 
         if "profile-submit" in request.POST:
@@ -60,9 +83,17 @@ class AccountView(LoginRequiredMixin, View):
                 messages.success(request, "Address updated successfully!")
                 return redirect("users:profile")
 
+        if "password-submit" in request.POST:
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)
+                messages.success(request, "Password updated successfully!")
+                return redirect("users:profile")
+
         context = {
             "profile_form": profile_form,
             "address_form": address_form,
+            "password_form": password_form,
         }
 
         return render(request, self.template_name, context)

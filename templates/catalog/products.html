@@ -31,14 +31,14 @@
       {% for product in product_list %}
         {% if product %}
           <article class="card product" id="kits">
-            <a class="img" href="product.html">
+            <a class="img" href="{% url 'catalog:product' slug=product.slug %}">
             <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
           </a>
           <div class="body">
             <div class="top">
               <div>
                 <div class="name">{{ product.name }}</div>
-                <div class="desc">{{ product.description }}</div>
+                <div class="desc">{{ product.short_description }}</div>
               </div>
               <div class="price">${{ product.price }}</div>
             </div>
@@ -51,7 +51,7 @@
                 <span class="pill out-of-stock">{{ product.product_stock }}</span>
               {% endif %}
               <div style="display:flex; gap:10px; align-items:center">
-                <a class="btn" href="#">Details</a>
+                <a class="btn" href="{% url 'catalog:product' slug=product.slug%}">Details</a>
                 <a class="btn primary" href="#">Add</a>
               </div>
             </div>

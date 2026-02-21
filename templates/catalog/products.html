@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="container">
+  <section class="section">
+    <div class="toolbar">
+      <div>
+        <h1 class="h1">Shop</h1>
+        <div class="muted">Browse products (static UI). Use filters to style your real store.</div>
+      </div>
+      <div class="filters">
+        <select class="select" aria-label="Sort">
+          <option>Sort: Featured</option>
+          <option>Price: Low to high</option>
+          <option>Price: High to low</option>
+          <option>Newest</option>
+        </select>
+        <select class="select" aria-label="Category">
+          <option>Category: All</option>
+          <option>Starter kits</option>
+          <option>Batteries</option>
+          <option>Cartridges</option>
+          <option>Accessories</option>
+        </select>
+        <input class="input" placeholder="Filter by keyword…" aria-label="Filter by keyword"/>
+      </div>
+    </div>
+
+    <div class="grid cols-4">
+      {% for product in product_list %}
+        {% if product %}
+          <article class="card product" id="kits">
+            <a class="img" href="product.html">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+          </a>
+          <div class="body">
+            <div class="top">
+              <div>
+                <div class="name">{{ product.name }}</div>
+                <div class="desc">{{ product.description }}</div>
+              </div>
+              <div class="price">${{ product.price }}</div>
+            </div>
+            <div class="subrow">
+              {% if product.product_stock == "In Stock" %}
+                <span class="pill in-stock">{{ product.product_stock }}</span>
+              {% elif product.product_stock == "Low Stock" %}
+                <span class="pill low-stock">{{ product.product_stock }}</span>
+              {% else %}
+                <span class="pill out-of-stock">{{ product.product_stock }}</span>
+              {% endif %}
+              <div style="display:flex; gap:10px; align-items:center">
+                <a class="btn" href="#">Details</a>
+                <a class="btn primary" href="#">Add</a>
+              </div>
+            </div>
+          </div>
+        </article>
+        {% endif %}
+      {% empty %}
+        <p>Currently, there are no items available.</p>
+      {% endfor %}
+
+
+    </div>
+  </section>
+</main>
+{% endblock %}

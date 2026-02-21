@@ -23,6 +23,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Categories"
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -37,3 +40,12 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.price} - {self.stock}"
+
+    @property
+    def product_stock(self):
+        if self.stock <= 0:
+            return "Sold Out"
+        elif self.stock <= 10:
+            return "Low Stock"
+        return "In Stock"
+

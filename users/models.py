@@ -46,7 +46,6 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(_("email address"), unique=True)
     phone = models.CharField(max_length=20, blank=True)
-    notes = models.TextField(blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -60,6 +59,7 @@ class Address(models.Model):
     )
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=150)
+    email = models.EmailField()
     country = models.CharField(max_length=65)
     city = models.CharField(max_length=120)
     postal_code = models.CharField(max_length=20)
@@ -68,7 +68,24 @@ class Address(models.Model):
     state = models.CharField(max_length=120)
     notes = models.TextField(blank=True)
 
-    is_default = models.BooleanField(default=True)
+    is_default = models.BooleanField(default=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user"],
+                condition=models.Q(is_default=True),
+                name="unique_default_address_per_user"
+            )
+        ]
+
+    def save(self, *args, **kwargs):
+        if self.is_default:
+            Address.objects.filter(
+                user=self.user,
+                is_default=True
+            ).update(is_default=False)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.street} {self.city} {self.country}"

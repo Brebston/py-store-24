@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="container">
+  <section class="section">
+    <div class="toolbar">
+      <div>
+        <h2 class="h1">Delete address</h2>
+        <div class="muted">This action cannot be undone.</div>
+      </div>
+      <a class="btn" href="{% url 'users:address_list' %}">Back</a>
+    </div>
+
+    <div class="card pad" style="border-color: rgba(255,77,109,.25); background: rgba(255,77,109,.06)">
+      <h3 style="margin-top:0">Are you sure you want to delete this address?</h3>
+
+      <div class="hr"></div>
+
+      <div class="card pad" style="background: rgba(255,255,255,.03)">
+        <div style="font-weight:800">{{ object.first_name }} {{ object.last_name }}</div>
+        <div class="muted" style="margin-top:2px">{{ object.email }} • {{ object.phone }}</div>
+        <div class="muted" style="margin-top:8px;line-height:1.5">
+          {{ object.street }}<br>
+          {{ object.postal_code }} {{ object.city }}{% if object.state %}, {{ object.state }}{% endif %}<br>
+          {{ object.country }}
+        </div>
+        {% if object.is_default %}
+          <div style="margin-top:10px">
+            <span class="pill warn">This is your default address</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <form method="post" style="margin-top:14px;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
+        {% csrf_token %}
+        <a class="btn" href="{% url 'users:address_list' %}">Cancel</a>
+        <button class="btn" type="submit" style="border-color: rgba(255,77,109,.35); background: rgba(255,77,109,.10)">
+          Yes, delete
+        </button>
+      </form>
+
+      {% if object.is_default %}
+        <div class="help" style="margin-top:12px">
+          Tip: after deleting, choose another address as default.
+        </div>
+      {% endif %}
+    </div>
+  </section>
+</main>
+{% endblock %}

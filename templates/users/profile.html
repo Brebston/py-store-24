@@ -14,20 +14,20 @@
       </form>
     </div>
 
-    <div class="grid cols-2">
-      <div class="card pad" id="profile">
+    {% if messages %}
+      {% for message in messages %}
+        {% if "success" in message.tags %}
+          <div class="form-global-success">
+            {{ message }}
+            </div>
+          {% endif %}
+      {% endfor %}
+    {% endif %}
+    <div class="profile-grid">
+      <div class="card pad">
         <h3>Personal details</h3>
         <div class="spacer"></div>
 
-        {% if messages %}
-          {% for message in messages %}
-              {% if "success" in message.tags %}
-                  <div class="form-global-success">
-                      {{ message }}
-                  </div>
-              {% endif %}
-          {% endfor %}
-        {% endif %}
         <form class="form" method="post">
           {% csrf_token %}
 
@@ -41,10 +41,6 @@
             {% include "components/form_field.html" with field=profile_form.phone %}
           </div>
 
-            <!-- Order notes -->
-            {% include "components/form_field.html" with field=profile_form.notes %}
-            <!-- End order notes -->
-
           <br>
           <div style="display:flex; gap:10px; flex-wrap:wrap">
             <button class="btn primary" name="profile-submit" type="submit">Save changes</button>
@@ -53,68 +49,65 @@
         </form>
       </div>
 
-      <div class="card pad" id="addresses">
-        <h3>Delivery address</h3>
-        <div class="spacer"></div>
+      <div class="card pad">
+        <div class="toolbar">
+          <h3 style="margin:0">My addresses</h3>
+          <a class="btn primary" href="{% url 'users:address_add' %}">
+            Add address
+          </a>
+        </div>
 
-        <form class="form" action="#" method="post">
-          <div class="two">
-            <div class="field">
-              <label for="fname">First name</label>
-              <input class="input" id="fname" placeholder="Alex" />
-            </div>
+        {% if request.user.addresses.all %}
+          <div class="address-list">
 
-            <div class="field">
-              <label for="lname">Last name</label>
-              <input class="input" id="lname" placeholder="Johnson" />
-            </div>
+            {% for address in request.user.addresses.all %}
+              <div class="card pad" style="background: rgba(255,255,255,.02)">
+
+                <div class="toolbar" style="margin-bottom:8px">
+                  <div>
+                    <b>{{ address.first_name }} {{ address.last_name }}</b>
+                    {% if address.is_default %}
+                      <span class="pill good" style="margin-left:8px">Default</span>
+                    {% endif %}
+                  </div>
+
+                  <div style="display:flex;gap:8px">
+                    <a class="btn" href="{% url 'users:address_edit' address.pk %}">
+                      Edit
+                    </a>
+
+                    {% if not address.is_default %}
+                      <a class="btn" href="{% url 'users:address_default' address.pk %}">
+                        Set default
+                      </a>
+                    {% endif %}
+
+                    <a class="btn" href="{% url 'users:address_delete' address.pk %}">
+                      Delete
+                    </a>
+                  </div>
+                </div>
+
+                <div class="muted" style="line-height:1.5">
+                  {{ address.street }}<br>
+                  {{ address.postal_code }} {{ address.city }}{% if address.state %}, {{ address.state }}{% endif %}<br>
+                  {{ address.country }}<br>
+                  {{ address.phone }} • {{ address.email }}
+                </div>
+
+              </div>
+            {% endfor %}
+
           </div>
 
-          <div class="two">
-            <div class="field">
-              <label for="email">Email</label>
-              <input class="input" id="email" placeholder="email@email.com" />
-            </div>
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input class="input" id="phone" placeholder="+48 123 456 789">
-            </div>
+        {% else %}
+          <div class="card pad" style="margin-top:14px;text-align:center">
+            <p class="muted">No addresses yet.</p>
+            <a class="btn primary" href="{% url 'users:address_add' %}">
+              Add your first address
+            </a>
           </div>
-
-          <div class="field">
-            <label for="line1">Address line</label>
-            <input class="input" id="line1" placeholder="Street, building, apartment" />
-          </div>
-
-          <div class="two">
-            <div class="field">
-              <label for="city">City</label>
-              <input class="input" id="city" placeholder="Warsaw" />
-            </div>
-            <div class="field">
-              <label for="zip">ZIP</label>
-              <input class="input" id="zip" placeholder="00-001" />
-            </div>
-          </div>
-
-          <div class="two">
-            <div class="field">
-              <label for="state">State/Region</label>
-              <input class="input" id="state" placeholder="Mazowieckie" />
-            </div>
-            <div class="field">
-              <label for="country">Country</label>
-              <input class="input" id="country" placeholder="Poland" />
-            </div>
-          </div>
-
-          <div style="display:flex; gap:10px; flex-wrap:wrap">
-            <button class="btn primary" type="button">Add / Update address</button>
-            <button class="btn" type="button">Set as default</button>
-          </div>
-
-          <div class="help">You can store multiple addresses in your real app; this is a single-address UI.</div>
-        </form>
+        {% endif %}
       </div>
     </div>
 
@@ -131,25 +124,20 @@
 
       <div class="spacer"></div>
 
-      <form class="form" action="#" method="post">
+      <form class="form" method="post">
+        {% csrf_token %}
+
         <div class="two">
-          <div class="field">
-            <label for="old">Current password</label>
-            <input class="input" id="old" type="password" placeholder="••••••••" />
-          </div>
-          <div class="field">
-            <label for="new">New password</label>
-            <input class="input" id="new" type="password" placeholder="Min 8 characters" />
-          </div>
+          {% include "components/form_field.html" with field=password_form.old_password %}
+          {% include "components/form_field.html" with field=password_form.new_password1 %}
         </div>
 
         <div class="field">
-          <label for="repeat">Repeat new password</label>
-          <input class="input" id="repeat" type="password" placeholder="Repeat new password" />
+          {% include "components/form_field.html" with field=password_form.new_password2 %}
         </div>
 
         <div style="display:flex; gap:10px; flex-wrap:wrap">
-          <button class="btn primary" type="button">Update password</button>
+          <button class="btn primary" name="password-submit" type="submit">Update password</button>
           <button class="btn" type="button" style="border-color:rgba(255,77,109,.25)">Reset via email</button>
         </div>
 

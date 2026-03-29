@@ -6,7 +6,11 @@
   <section class="section">
     <div class="card pad">
       <div class="grid cols-2">
+      {% if product.image.url != null %}
         <div class="product-page-media"><img src="{{ product.image.url }}" alt="Product image placeholder" /></div>
+      {% else %}
+        <div class="product-page-media"><img src="{% static 'assets/img/no_image.png' %}" alt="Product image placeholder" /></div>
+      {% endif %}
         <div>
           <h1 class="h1" style="margin-top:0">{{ product.name }}</h1>
           <div class="muted">{{ product.short_description }}</div>

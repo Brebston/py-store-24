@@ -29,10 +29,16 @@
 
     <div class="grid cols-4">
       {% for product in product_list %}
-        {% if product %}
+        {% if product and product.is_active %}
           <article class="card product" id="kits">
             <a class="img" href="{% url 'catalog:product' slug=product.slug %}">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+              {% if product.image.url != null %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+              {% else %}
+                <div class="no-image">
+                  <span>No image</span>
+                </div>
+              {% endif %}
           </a>
           <div class="body">
             <div class="top">

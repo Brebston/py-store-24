@@ -1,3 +1,2 @@
 from django.db import models
-
-# Create your models here.
+from django.shortcuts import render, redirect, get_object_or_404

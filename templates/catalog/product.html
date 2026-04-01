@@ -34,7 +34,7 @@
           </div>
 
           <div class="hero-cta" style="margin-top:14px">
-            <a class="btn primary" href="cart.html">Add to cart <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h12"/><path d="m13 6 6 6-6 6"/></svg></a>
+            <a class="btn primary" onclick="addToCartById({{ product.id }})">Add to cart <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h12"/><path d="m13 6 6 6-6 6"/></svg></a>
             <a class="btn" href="{% url 'catalog:products' %}">Back to shop</a>
           </div>
 

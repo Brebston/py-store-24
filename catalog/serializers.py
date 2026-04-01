@@ -6,18 +6,22 @@ from catalog.models import Category, Product
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = [
+        fields = (
+            "id",
             "name",
             "slug",
             "description",
             "is_active",
-        ]
+        )
 
 
-class ProductSerializer(serializers.ModelSerializer,):
+class ProductSerializer(
+    serializers.ModelSerializer,
+):
     class Meta:
         model = Product
-        fields = [
+        fields = (
+            "id",
             "name",
             "slug",
             "short_description",
@@ -31,4 +35,4 @@ class ProductSerializer(serializers.ModelSerializer,):
             "specs",
             "is_active",
             "created_at",
-        ]
+        )

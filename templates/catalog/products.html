@@ -29,16 +29,22 @@
 
     <div class="grid cols-4">
       {% for product in product_list %}
-        {% if product %}
+        {% if product and product.is_active %}
           <article class="card product" id="kits">
-            <a class="img" href="product.html">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+            <a class="img" href="{% url 'catalog:product' slug=product.slug %}">
+              {% if product.image.url != null %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+              {% else %}
+                <div class="no-image">
+                  <span>No image</span>
+                </div>
+              {% endif %}
           </a>
           <div class="body">
             <div class="top">
               <div>
                 <div class="name">{{ product.name }}</div>
-                <div class="desc">{{ product.description }}</div>
+                <div class="desc">{{ product.short_description }}</div>
               </div>
               <div class="price">${{ product.price }}</div>
             </div>
@@ -51,8 +57,8 @@
                 <span class="pill out-of-stock">{{ product.product_stock }}</span>
               {% endif %}
               <div style="display:flex; gap:10px; align-items:center">
-                <a class="btn" href="#">Details</a>
-                <a class="btn primary" href="#">Add</a>
+                <a class="btn" href="{% url 'catalog:product' slug=product.slug%}">Details</a>
+                <a class="btn primary" onclick="addToCartById({{ product.id }})">Add</a>
               </div>
             </div>
           </div>

@@ -14,6 +14,9 @@
 
   <link rel="stylesheet" href="{% static 'styles/css/main.css' %}" />
   <script src="{% static 'styles/js/popup.js' %}"></script>
+  <script src="{% static 'styles/js/add_to_cart.js' %}"></script>
+  <script src="{% static 'styles/js/utils.js' %}"></script>
+  <script src="{% static 'styles/js/cart_badge.js' %}"></script>
 </head>
 
 <!-- Error popup -->
@@ -44,10 +47,10 @@
 
       <div class="actions">
 
-        <a class="iconbtn" href="#" aria-label="Open cart" style="position:relative">
+        <a class="iconbtn" href="{% url 'cart:page' %}" aria-label="Open cart" style="position:relative">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                stroke-width="2"><path d="M6 6h15l-2 9H7L6 6Z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/>
-            <circle cx="18" cy="20" r="1.5"/></svg><span class="badge" aria-label="Items in cart">2</span>
+            <circle cx="18" cy="20" r="1.5"/></svg><span class="badge" id="cart-badge">0</span>
         </a>
 
         <a class="iconbtn" href="{% url 'users:profile' %}" aria-label="Account">
@@ -59,6 +62,7 @@
   </div>
 </div>
 
+<div id="message-container"></div>
 
 {% block content %}
 {% endblock %}

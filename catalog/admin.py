@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db import models
+from jsoneditor.forms import JSONEditor
 
 from catalog.models import Category, Product
 
@@ -19,11 +21,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.JSONField: {'widget': JSONEditor},
+    }
+
     list_display = (
         "id",
         "name",
         "slug",
-        "description",
         "price",
         "stock",
         "category",

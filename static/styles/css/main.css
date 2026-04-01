@@ -32,7 +32,7 @@
 
 *{box-sizing:border-box}
 
-html,body{pill
+html,body{
     height:100%
 }
 
@@ -226,6 +226,26 @@ small{color:var(--muted)}
 .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
 .grid.cols-2{grid-template-columns: repeat(2, 1fr)}
 
+.grid.cols-4 > .product {
+  height: 100%;
+}
+
+.grid-auto-layout {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+}
+
+.grid-flexible {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-flexible > *:only-child {
+  grid-column: span 2;
+}
+
 .profile-grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
@@ -248,9 +268,18 @@ small{color:var(--muted)}
   background: rgba(255,255,255,.03);
   overflow:hidden;
 }
-.card.pad{padding: 16px}
-.card h3{margin:0; font-size: 16px}
-.card p{margin: 8px 0 0; color: var(--muted); font-size: 14px}
+.card.pad {
+  padding: 16px;
+}
+.card h3 {
+  margin:0;
+  font-size: 16px;
+}
+.card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
 
 .category{
   display:flex; gap: 12px; align-items:center;
@@ -264,23 +293,68 @@ small{color:var(--muted)}
 }
 
 .product{
-  display:flex; flex-direction:column;
+  display:flex;
+  flex-direction:column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.product .img{
-  aspect-ratio: 4/3;
-  background: rgba(255,255,255,.03);
-  border-bottom: 1px solid var(--line);
+
+.product:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
-.product .img img{width:100%; height:100%; object-fit:cover}
-.product .body{padding: 14px}
+
+.product .body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 14px 14px 18px;
+}
 .product .top{
-  display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
 }
-.product .name{font-weight: 700}
-.product .desc{margin-top: 6px; color: var(--muted); font-size: 13px; line-height:1.35}
+
+.product .subrow {
+  margin-top: auto;
+  padding-top: 12px;
+  padding-bottom: 4px;
+}
+
+.product .name {
+  font-weight: 700;
+}
+.product .desc{
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+  min-height: 36px;
+}
+
+.no-image {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.no-image::before {
+  content: "📦";
+  font-size: 24px;
+  opacity: 0.5;
+}
+
 .price{
   font-weight: 800;
-  letter-spacing:.2px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  margin-top: 2px;
 }
 .subrow{
   margin-top: 12px;
@@ -466,9 +540,6 @@ textarea.input{height:auto; padding: 10px 12px; min-height: 96px; resize: vertic
 /* 1) Make hero image feel like a real "promo" instead of abstract blob */
 .hero-art img,
 .banner img,
-.product .img img {
-  image-rendering: auto;
-}
 
 /* Replace the placeholder label that looked like "UI template..." by hiding any stray text inside SVG on small screens */
 .hero-art .meta .kpi,
@@ -502,13 +573,17 @@ textarea.input{height:auto; padding: 10px 12px; min-height: 96px; resize: vertic
 }
 
 /* 3b) Generic product card image height uniformity */
-.product .img{
-  aspect-ratio: 4/3;
+.product .img {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .product .img img{
-  width:100%;
-  height:100%;
-  object-fit: cover;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 /* 3c) Dropdown: fix low-contrast options in some browsers */
@@ -609,8 +684,8 @@ select.select option{
 .banner .content{
   display:flex;
   flex-direction:column;
-  justify-content:center;   /* vertical center */
-  align-items:center;       /* horizontal center */
+  justify-content:center;
+  align-items:center;
   text-align:center;
   gap: 10px;
   padding: 18px;
@@ -654,12 +729,11 @@ select.select option{
   gap:14px;
   margin-top:14px;
 
-  max-height: 420px;  /* ≈ 3 адреси */
+  max-height: 420px;
   overflow-y: auto;
   padding-right:6px;
 }
 
-/* красивий scrollbar */
 .address-list::-webkit-scrollbar{
   width:6px;
 }
@@ -669,4 +743,63 @@ select.select option{
 }
 .address-list::-webkit-scrollbar-track{
   background: transparent;
+}
+
+.empty-cart {
+  padding: 32px;
+  text-align: center;
+  color: #777;
+}
+
+.remove-btn {
+  border: none;
+  background: transparent;
+  color: #c00;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 6px;
+  padding: 0;
+}
+
+.qty .btn-sm {
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkout-disabled {
+  opacity: .6;
+  pointer-events: none;
+}
+
+.message {
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.message.success {
+  background: #1f7a1f;
+  color: white;
+}
+
+.message.error {
+  background: #a12a2a;
+  color: white;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.qty-input {
+  -moz-appearance: textfield;
+  width: 50px;
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
 }
